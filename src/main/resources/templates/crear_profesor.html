@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Registro de estudiantes</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="#"> Control de Profesores</a>
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link"
+                                    th:href="@{/profesores}">Control de Profesores</a></li>
+        </ul>
+    </div>
+</nav>
+
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class="text-center">Registro de Profesores</h1>
+            <div class="card-body">
+                <form th:action="@{/profesores}" th:object="${profesor}" method="POST">
+                    <div class="form-group">
+                        <label>Nombre : </label>
+                        <input type="text" name="nombre" th:field="*{nombre}" class="form-control" placeholder="Digite su nombre : ">
+                        <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="alert alert-danger mb-3 mt-3" ></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Apellido Paterno : </label>
+                        <input type="text" name="primer_apellido" th:field="*{primer_apellido}" class="form-control" placeholder="---- ">
+                        <div th:if="${#fields.hasErrors('primer_apellido')}" th:errors="*{primer_apellido}" class="alert alert-danger mb-3 mt-3" ></div>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Apellido Materno : </label>
+                        <input type="text" name="segundo_apellido" th:field="*{segundo_apellido}" class="form-control" placeholder="---- ">
+                        <div th:if="${#fields.hasErrors('segundo_apellido')}" th:errors="*{segundo_apellido}" class="alert alert-danger mb-3 mt-3" ></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefono : </label>
+                        <input type="number" name="telefono" th:field="*{telefono}" class="form-control" placeholder="---- ">
+                        <div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="alert alert-danger mb-3 mt-3" ></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Correo Electronico : </label>
+                        <input type="email" name="correo_electronico" th:field="*{correo_electronico}" class="form-control" placeholder="---- ">
+                        <div th:if="${#fields.hasErrors('correo_electronico')}" th:errors="*{correo_electronico}" class="alert alert-danger mb-3 mt-3" ></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Sueldo : </label>
+                        <input type="number" name="sueldo" th:field="*{sueldo}" class="form-control" placeholder="---- ">
+                        <div th:if="${#fields.hasErrors('sueldo')}" th:errors="*{sueldo}" class="alert alert-danger mb-3 mt-3" ></div>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Grado Academico :</label>
+                        <select class="form-control" th:field="*{gradosAcademicos.id}">
+                            <option th:each="tmpTamano : ${listarGrados}" th:value="${tmpTamano.id}" th:text="${tmpTamano.nombre}" />
+                        </select>
+                    </div>
+                    <div class="box-footer">
+                        <button class="btn btn-success">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
