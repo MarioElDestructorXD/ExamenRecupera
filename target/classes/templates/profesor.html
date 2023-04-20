@@ -11,7 +11,7 @@
 
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <a class="navbar-brand" href="#"> Control de estudiantes</a>
+    <a class="navbar-brand" href="#"> Control de Profesores</a>
     <!-- Navbar links -->
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
@@ -32,36 +32,35 @@
         </div>
     </div>
     <br>
-    <table class="table table-striped table-bordered">
-        <thead class="table-dark">
-        <tr>
-            <th>#</th>
-            <th>Nombre</th>
-            <th>Apellido Paterno</th>
-            <th>Apellido Materno</th>
-            <th>Telefono</th>
-            <th>Correo Electronico</th>
-            <th>Sueldo</th>
-            <th>Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="profesor : ${profesor}">
-            <td th:text="${profesor.id}"></td>
-            <td th:text="${profesor.nombre}"></td>
-            <td th:text="${profesor.primer_apellido}"></td>
-            <td th:text="${profesor.segundo_apellido}"></td>
-            <td th:text="${profesor.telefono}"></td>
-            <td th:text="${profesor.correo_electronico}"></td>
-            <td th:text="${profesor.sueldo}"></td>
-            <td>
-                <a th:href="@{/profesores/editar/{id}(id=${profesor.id})}" class="btn btn-info">Editar</a>
-                <a th:href="@{/profesores/{id}(id=${profesor.id})}" class="btn btn-danger">Eliminar</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
 </div>
-
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+    <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Apellido Paterno</th>
+        <th>Apellido Materno</th>
+        <th>Telefono</th>
+        <th>Correo Electronico</th>
+        <th>Sueldo</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="profesor : ${profesor}">
+        <td th:text="${profesor.id}"></td>
+        <td th:text="${profesor.nombre}"></td>
+        <td th:text="${profesor.primer_apellido}"></td>
+        <td th:text="${profesor.segundo_apellido}"></td>
+        <td th:text="${profesor.telefono}"></td>
+        <td th:text="${profesor.correo_electronico}"></td>
+        <td th:text="${profesor.sueldo}"></td>
+        <td>
+            <a th:href="@{/profesores/editar/{id}(id=${profesor.id})}" class="btn btn-info">Editar</a>
+            <a th:href="@{/profesores/{id}(id=${profesor.id})}" class="btn btn-danger">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

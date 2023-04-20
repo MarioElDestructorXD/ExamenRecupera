@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Registro de estudiantes</title>
+    <title>Registro de Profesor</title>
     <!-- CSS only -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group">
                         <label>Telefono : </label>
-                        <input type="number" name="telefono" th:field="*{telefono}" class="form-control" placeholder="---- ">
+                        <input type="text" name="telefono" th:field="*{telefono}" class="form-control" placeholder="---- ">
                         <div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="alert alert-danger mb-3 mt-3" ></div>
                     </div>
                     <div class="form-group">
@@ -57,7 +57,11 @@
                         <label>Sueldo : </label>
                         <input type="number" name="sueldo" th:field="*{sueldo}" class="form-control" placeholder="---- ">
                         <div th:if="${#fields.hasErrors('sueldo')}" th:errors="*{sueldo}" class="alert alert-danger mb-3 mt-3" ></div>
-
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha de Registro : </label>
+                        <input type="date" name="fecha_registro" th:field="*{fecha_registro}" class="form-control" placeholder="---- ">
+                        <div th:if="${#fields.hasErrors('fecha_registro')}" th:errors="*{fecha_registro}" class="alert alert-danger mb-3 mt-3" ></div>
                     </div>
                     <div class="form-group">
                         <label>Grado Academico :</label>

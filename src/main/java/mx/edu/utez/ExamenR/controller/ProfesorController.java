@@ -30,15 +30,15 @@ public class ProfesorController {
     }
 
     @GetMapping("/profesores/nuevo")
-    public String mostrarFormularioDeRegistrtarProfesor(Model modelo) {
-        Profesor profesor = new Profesor();
+    public String mostrarFormularioDeRegistrtarProfesor(Model modelo, Profesor profesor) {
         modelo.addAttribute("listarGrados", GAService.listarTodosLosGradosAcademicos());
         modelo.addAttribute("profesor", profesor);
         return "crear_profesor.html";
     }
 
     @PostMapping("/profesores")
-    public String guardarProfesor(@Valid @ModelAttribute("profesor") Profesor profesor, BindingResult result) {
+    public String guardarProfesor(@Valid @ModelAttribute("profesor") Profesor profesor, BindingResult result, Model modelo) {
+        modelo.addAttribute("listarGrados", GAService.listarTodosLosGradosAcademicos());
         if (result.hasErrors()){
             for (ObjectError error: result.getAllErrors()){
                 System.out.println("Error: " + error.getDefaultMessage());
@@ -68,6 +68,7 @@ public class ProfesorController {
         profesorExistente.setCorreo_electronico(profesor.getCorreo_electronico());
         profesorExistente.setSueldo(profesor.getSueldo());
         profesorExistente.setGradosAcademicos(profesor.getGradosAcademicos());
+        profesorExistente.setFecha_registro(profesor.getFecha_registro());
 
         servicio.actualizarProfesor(profesorExistente);
         return "redirect:/profesores";

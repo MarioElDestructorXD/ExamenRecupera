@@ -1,11 +1,9 @@
 package mx.edu.utez.ExamenR.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 @Entity
@@ -14,28 +12,30 @@ public class Profesor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+    @NotEmpty(message = "El nombre no dbe ir vacio")
     @Column(nullable = false, length = 45)
     private String nombre;
-    @NotBlank
+    @NotEmpty(message = "El apellido paterno no puede ir vacio")
     @Column(nullable = false, length = 45)
     private String primer_apellido;
     @Column(length = 45)
     private String segundo_apellido;
-    @NotNull
+    @NotEmpty(message = "El telefono no debe ir vacio")
     @Column(nullable = false, length = 10)
     private String telefono;
+    @NotEmpty
     @Email
     @Column(nullable = false, length = 60)
     private String correo_electronico;
-    @NotNull
-    @Min(0)
+
+    @Min(value = 1,message = "el sueldo no puede ser menor a 0")
     @Column(nullable = false)
     private float sueldo;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "La fecha no puede ser nulo")
     @Column(name = "fecha_registro", nullable = false)
-    @CreationTimestamp
     private Date fecha_registro;
-    @NotNull
+    @NotNull(message = "Es requerido el grado academico")
     @ManyToOne
     @JoinColumn(name = "grado_academico_id", nullable = false)
     private GradosAcademicos gradosAcademicos;
