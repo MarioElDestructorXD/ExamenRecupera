@@ -4,7 +4,9 @@ import jakarta.validation.Valid;
 import mx.edu.utez.ExamenR.model.Profesor;
 import mx.edu.utez.ExamenR.repositories.ProfesorRepository;
 import mx.edu.utez.ExamenR.service.GradosAcademicosService;
+import mx.edu.utez.ExamenR.service.GradosAcademicosServiceImpl;
 import mx.edu.utez.ExamenR.service.ProfesorService;
+import mx.edu.utez.ExamenR.service.ProfesorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,16 +20,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ProfesorController {
     @Autowired
-    private ProfesorService servicio;
+    private ProfesorServiceImpl servicio;
 
     @Autowired
-    private GradosAcademicosService GAService;
+    private GradosAcademicosServiceImpl GAService;
 
     @GetMapping({ "/profesores", "/" })
     public String listarProfesor(Model modelo) {
         modelo.addAttribute("profesor", servicio.listarTodosLosProfesores());
         return "profesor"; // nos retorna al archivo estudiantes
     }
+
+    @GetMapping("/mostrar/{id}")
+    public String mostrarProfesor(@PathVariable long id, Model model){
+        Profesor profesor = servicio.obtenerProfesorPorId(id);
+        if (profesor != null){
+            model.addAttribute("profesor", profesor);
+            return "showProfesor";
+        }
+        return "profesor";
+    }
+
 
     @GetMapping("/profesores/nuevo")
     public String mostrarFormularioDeRegistrtarProfesor(Model modelo, Profesor profesor) {
