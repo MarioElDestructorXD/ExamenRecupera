@@ -1,6 +1,7 @@
 package mx.edu.utez.ExamenR.controller;
 
 import jakarta.validation.Valid;
+import mx.edu.utez.ExamenR.model.GradosAcademicos;
 import mx.edu.utez.ExamenR.model.Profesor;
 import mx.edu.utez.ExamenR.repositories.ProfesorRepository;
 import mx.edu.utez.ExamenR.service.GradosAcademicosService;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class ProfesorController {
     @Autowired
@@ -31,12 +35,12 @@ public class ProfesorController {
         return "profesor"; // nos retorna al archivo estudiantes
     }
 
-    @GetMapping("/mostrar/{id}")
+    @GetMapping("/profesores/mostrar/{id}")
     public String mostrarProfesor(@PathVariable long id, Model model){
         Profesor profesor = servicio.obtenerProfesorPorId(id);
         if (profesor != null){
             model.addAttribute("profesor", profesor);
-            return "showProfesor";
+            return "mostrar_profesor";
         }
         return "profesor";
     }
@@ -71,7 +75,8 @@ public class ProfesorController {
 
     @PostMapping("/profesores/{id}")
     public String actualizarProfesor(@PathVariable Long id, @ModelAttribute("profesor") Profesor profesor,
-                                       Model modelo) {
+                                       Model modelo, BindingResult result) {
+
         Profesor profesorExistente = servicio.obtenerProfesorPorId(id);
         profesorExistente.setId(id);
         profesorExistente.setNombre(profesor.getNombre());
